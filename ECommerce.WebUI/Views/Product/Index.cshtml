@@ -1,0 +1,55 @@
+﻿@model ProductListViewModel
+@{
+    var azData = !@Model.AZOrder;
+    var highLowData = !@Model.HighLowOrder;
+}
+
+
+@if (Model.Products == null || Model.Products.Count==0)
+{
+    <span class="alert alert-info">No Product Exist!</span>
+}
+else
+{
+
+    <div >
+        <a href="/product/index?azOrder=@azData" style="text-decoration:none; border:solid lightgray 1px;padding:2px;">A-Z</a>
+        <a href="/product/index?highLowOrder=@highLowData" style="text-decoration:none; border:solid lightgray 1px;padding:2px;">H-L</a>
+    </div>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+                <th>Product Name</th>
+                <th>Unit Price</th>
+                <th>UnitsInStock</th>
+                <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>
+                        @item.UnitPrice
+                    </td>
+                    <td>
+                        @item.UnitsInStock
+                    </td>
+                    <td>
+                        <a class="btn btn-xs btn-success"
+                           href="/Cart/AddToCart?productId=@item.ProductId&page=@Model.CurrentPage&category=@Model.CurrentCategory">Add To Cart</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <product-list-pager current-category="@Model.CurrentCategory"
+                        current-page="@Model.CurrentPage"
+                        page-count="@Model.PageCount"
+                        page-size="@Model.PageSize"></product-list-pager>
+}
