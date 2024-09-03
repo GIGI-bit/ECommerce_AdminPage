@@ -42,6 +42,16 @@ namespace ECommerce.Core.DataAccess.EntityFramework
 
         }
 
+        public async Task DeleteList(List<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                var deletedEntity=context.Entry(entity);
+                deletedEntity.State = EntityState.Deleted;
+
+            }
+            await context.SaveChangesAsync();
+        }
         public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter)
         {
 

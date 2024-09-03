@@ -13,10 +13,12 @@ namespace ECommerce.Business.Concrete
     public class ProductService : IProductService
     {
         private readonly IProductDal _productDal;
+        private readonly IOrderDetailsDal _orderDetailsDal;
 
-        public ProductService(IProductDal productDal)
+        public ProductService(IProductDal productDal,IOrderDetailsDal orderDetailsDal)
         {
             _productDal = productDal;
+            _orderDetailsDal = orderDetailsDal;
         }
 
         public async Task AddAsync(Product product)
@@ -27,6 +29,8 @@ namespace ECommerce.Business.Concrete
         public async Task DeleteAsync(int id)
         {
             var item = await _productDal.Get(p => p.ProductId == id);
+            var order = await _orderDetailsDal.GetList(o => o.ProductId == id);
+            await _orderDetailsDal.DeleteList(order);
             await _productDal.Delete(item);
         }
 

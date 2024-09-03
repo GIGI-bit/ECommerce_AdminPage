@@ -14,6 +14,7 @@ namespace ECommerce.Core.DataAccess
         Task<List<T>> GetList(Expression<Func<T, bool>> filter=null);
         Task Add(T entity);
         Task Delete(T entity);
+        Task DeleteList(List<T> entities);
         Task Update(T entity);
     }
 }

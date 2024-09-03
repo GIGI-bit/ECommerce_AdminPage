@@ -123,5 +123,20 @@ namespace ECommerce.WebUI.Controllers
                 return View();
             }
         }
+
+        public async Task<IActionResult> Search(string key)
+        {
+            if (key != null)
+            {
+                var list = await _productService.GetAllAsync();
+                var results = list.Where(p => p.ProductName.ToLower().StartsWith(key.ToLower())).ToList();
+                var listDto = new ProductListViewModel { Products = results };
+
+                return PartialView("_SearchedProductListPartial", listDto);
+            }
+            else return Ok();
+
+        }
+
     }
 }

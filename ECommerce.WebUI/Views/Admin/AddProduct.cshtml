@@ -1,0 +1,27 @@
+﻿@model ProductAddViewModel
+
+<form asp-controller="Admin" asp-action="AddProduct" style="width:30vw;display:flex;flex-direction:column;gap:1vh;">
+    <section style="display:flex;justify-content:space-between">
+        <label asp-for="Product.ProductName"></label>
+        <input asp-for="Product.ProductName" />
+        <span style="color:red;" asp-validation-for="Product.ProductName"></span>
+    </section>  
+    <section style="display:flex;justify-content:space-between">
+        <label asp-for="Product.UnitPrice"></label>
+        <input asp-for="Product.UnitPrice" />
+        <span style="color:red;" asp-validation-for="Product.UnitPrice"></span>
+    </section>
+    <section style="display:flex;justify-content:space-between">
+        <label asp-for="Product.UnitsInStock"></label>
+        <input asp-for="Product.UnitsInStock" />
+        <span style="color:red;" asp-validation-for="Product.UnitsInStock"></span>
+    </section>
+    <section style="display:flex;justify-content:space-between">
+        <label asp-for="Product.CategoryId"></label>
+        <input asp-for="Product.CategoryId" />
+        <span style="color:red;" asp-validation-for="Product.CategoryId"></span>
+    </section>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+
+

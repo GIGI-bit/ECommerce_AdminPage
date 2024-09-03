@@ -1,0 +1,27 @@
+﻿@model CategoryListViewModel
+
+@{
+    var allCategories = Model.CurrentCategory == 0 ? "list-group-item active" : "list-group-item";
+}
+
+<section class="list-group">
+    <a href="/admin/index?category=0" style="cursor:pointer" class="@allCategories">All Categories</a>
+    @foreach (var item in Model.Categories)
+    {
+        var css = "list-group-item";
+        @if (item.CategoryId == Model.CurrentCategory)
+        {
+            css += " active";
+        }
+        <div style="display:flex; align-items:center; justify-content:space-between;" class="@css">
+            <a  href="/admin/index?category=@item.CategoryId" style="cursor:pointer;color:darkgray;text-decoration:none;">@item.CategoryName</a>
+            <div>
+                <a class="btn btn-danger" style="font-size:10px; width:4vw; font-weight:500" href="/admin/removeCategory?categoryId=@item.CategoryId">Remove</a>
+            </div>
+        </div>
+    
+    }
+
+
+
+</section>

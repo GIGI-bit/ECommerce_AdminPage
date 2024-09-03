@@ -1,0 +1,6 @@
+﻿@model CategoryAddViewModel
+
+<form asp-controller="Admin" asp-action="Add" style="display:flex;">
+    <input asp-for="Category.CategoryName" style="width:11vw;" placeholder="Category Name"/>
+    <button class="btn btn-success" type="submit">+</button>
+</form>
